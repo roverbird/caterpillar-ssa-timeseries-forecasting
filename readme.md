@@ -2,6 +2,10 @@
 
 This repository contains a slightly updated version of the `pssa` repository, originally developed by [aj-cloete](https://github.com/aj-cloete/pssa) and broadly based on the research of [Nina Golyandina](https://scholar.google.it/citations?user=1druVRYAAAAJ&hl=it) from St. Petersburg, Russia. The original script is in `original` directory, and its updated version is in the `scripts` dir. The purpose of this repo is to have an up-to-date and user-friendly Python implementation of Singular Spectrum Analysis (SSA) for time series forecasting, so that anyone could easily experiment with their datasets and quickly see an SSA forecast for their data.
 
+![Caterpillar SSA](https://github.com/roverbird/caterpillar-ssa-timeseries-forecasting/blob/main/data/Operophtera_brumata_caterpillar.jpg)
+
+_The Caterpillar SSA (Гусеница) appeared independently in Russia and other countries in the 1960s and 1970s._
+
 ## What is Singular Spectrum Analysis (SSA)?
 
 Singular Spectrum Analysis (SSA) is a non-parametric technique in machine learning used to analyze and forecast time series data. SSA decomposes a time series into a sum of interpretable components such as trends, oscillatory patterns, and noise. The "Caterpillar" method of SSA originated independently in Russia under the name “Гусеница” and in other countries the method is known as SSA, or Eigen Decomposition.
@@ -14,13 +18,15 @@ Non-parametric approach allows SSA to capture complex, non-linear patterns and d
 
 ## SSA vs SARIMA
 
-SARIMA and SSA are both valid methods for analyzing time series data with seasonal patterns, but they approach the problem differently, and are not directly comparable. SARIMA (Seasonal ARIMA, or Seasonal Autoregressive Integrated Moving Average) is specifically designed to handle seasonal effects by incorporating seasonal differencing and autoregressive terms into its model. In contrast, SSA offers a more advanced and flexible approach by decomposing the time series into additive components such as trends, seasonal patterns, and noise through matrix decomposition. While these methods are not directly comparable due to their distinct methodologies, they can be evaluated against each other in practical applications to determine which best captures the underlying patterns and performs more accurately for a given real-world time series. See some examples of such a comparison [here](https://www.researchgate.net/publication/348820189_Comparison_of_SSA_and_SARIMA_in_Forecasting_the_Rainfall_in_Sumatera_Barat/).
+[SARIMA](https://github.com/roverbird/time-series-forecasting-adriatic-tide) and SSA are both valid methods for analyzing time series data with seasonal patterns, but they approach the problem differently, and are not directly comparable. SARIMA (Seasonal ARIMA, or Seasonal Autoregressive Integrated Moving Average) is specifically designed to handle seasonal effects by incorporating seasonal differencing and autoregressive terms into its model. In contrast, SSA offers a more advanced and flexible approach by decomposing the time series into additive components such as trends, seasonal patterns, and noise through matrix decomposition. While these methods are not directly comparable due to their distinct methodologies, they can be evaluated against each other in practical applications to determine which best captures the underlying patterns and performs more accurately for a given real-world time series. See some examples of such a comparison [here](https://www.researchgate.net/publication/348820189_Comparison_of_SSA_and_SARIMA_in_Forecasting_the_Rainfall_in_Sumatera_Barat/).
+
+Please, check out [python implementation of SARIMA](https://github.com/roverbird/time-series-forecasting-adriatic-tide) with tidal data from Koper, Slovenia. 
 
 ## Historical Background
 
 The ["Caterpillar"-SSA](https://en.wikipedia.org/wiki/Singular_spectrum_analysis) approach emerged in the 1980s and 1990s across various fields of both theoretical and applied science. SSA, or Singular Spectrum Analysis, is designed to solve a wide array of problems related to the study of one-dimensional time series. While there are extensions for two-dimensional time series and random fields, this implementation focuses solely on one-dimensional time series analysis and forecasting.
 
-The method's foundation lies in representing a time series as a matrix, which is then decoHistorical Backgroundmposed into a sum of matrices using Singular Value Decomposition (SVD). Each matrix corresponds to an additive component of the original time series. Thus, the series is decomposed into components, with information about each component contained in singular values and vectors.
+The method's foundation lies in representing a time series as a matrix, which is then decomposed into a sum of matrices using Singular Value Decomposition (SVD). Each matrix corresponds to an additive component of the original time series. Thus, the series is decomposed into components, with information about each component contained in singular values and vectors.
 
 The "Caterpillar" (Гусеница) appeared independently in Russia and other countries in the 1960s and 1970s. The Saint Petersburg State University (then Leningrad State University) was instrumental in its development, with significant contributions from the Department of Statistical Modeling under the leadership of S.M. Ermakov. Nowadays, [Nina Golyandina](https://scholar.google.it/citations?user=1druVRYAAAAJ&hl=it) is knows for her extensive publications and research of the Caterpillar-SSA.
 
@@ -104,7 +110,6 @@ It calls the `embed` method of the `mySSA` class with specific values that you c
 
 ![Plot example 1](https://github.com/roverbird/caterpillar-ssa-timeseries-forecasting/blob/main/data/time_series_plot.png)
 _Original tidal data from Koper, Slovenia_
-
 
 ![Plot example 2](https://github.com/roverbird/caterpillar-ssa-timeseries-forecasting/blob/main/data/singular_contributions_plot.png)
 _Singular value contribution shows the contribution of each of the signals_
@@ -198,10 +203,6 @@ timestamp
 - **Plot Interpretation**: If you view the plots generated by the script, you would typically see how well the forecast matches the actual time series. Ideally, the forecast should closely track the actual values, indicating that the SSA model effectively learned and extrapolated from historical data.
 
 The results show that the SSA implementation successfully embedded the time series, decomposed it into components, and produced forecasts that align well with the actual observed values. The high characteristic of projection suggests that the model has captured most of the time series' variability with a small number of components.
-
-## Contributing
-
-Contributions are welcome! Feel free to submit issues and pull requests to help improve the project.
 
 ## License
 
