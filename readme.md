@@ -100,9 +100,23 @@ It calls the `embed` method of the `mySSA` class with specific values that you c
   - Reconstructed components: now that we have the signal components we loop over that range and look at each one individually, output to plots `reconstruction_plot{N}.png`
   - Forecast: forecasted vs. original time series is in `forecast_plot.png` (set the length of forecast in `steps_ahead`)
   - Split and test: comparison of forecast vs. actual data is in `forecast_vs_actual.png`
-  
+
+
+![Plot example 1](https://github.com/roverbird/caterpillar-ssa-timeseries-forecasting/blob/main/data/time_series_plot.png)
+_Original tidal data from Koper, Slovenia_
+
+
+![Plot example 2](https://github.com/roverbird/caterpillar-ssa-timeseries-forecasting/blob/main/data/singular_contributions_plot.png)
+_Singular value contribution shows the contribution of each of the signals_
+
+![Plot example 3](https://github.com/roverbird/caterpillar-ssa-timeseries-forecasting/blob/main/data/forecast_vs_actual.png)
+_Split and test results comparing predictions with historic data, the plot also shows absolute error in prediction_
+
+![Plot example 4](https://github.com/roverbird/caterpillar-ssa-timeseries-forecasting/blob/main/data/forecast_plot.png)
+_Forecast plot_
+
 - **Data**:
-  - DataFrames of the reconstructed components and forecasts.
+  - DataFrames of the reconstructed components and forecasts are additionally output when running the `mySSAtest2.py` script.
 
 ### Explanation of Outputs and Results
 
