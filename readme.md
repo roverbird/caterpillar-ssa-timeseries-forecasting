@@ -67,7 +67,6 @@ pip install numpy pandas scipy matplotlib
 
 ```bash
 git clone https://github.com/roverbird/caterpillar-ssa-timeseries-forecasting.git
-cd your-repo
 ```
 
 2. Prepare your time series data as a CSV file with a timestamp column and a value column (input should contain these two columns); manutally adjust your timestamp format in the script (look for comments).
@@ -75,7 +74,7 @@ cd your-repo
 3. Run the script:
 
 ```bash
-python mySSAtest2.py
+python ~/caterpillar-ssa-timeseries-forecasting/scripts/mySSAtest2.py
 ```
 
 ### Parameters
