@@ -8,19 +8,25 @@ _The Caterpillar SSA (Гусеница) appeared independently in Russia and oth
 
 ## What is Singular Spectrum Analysis (SSA)?
 
-Singular Spectrum Analysis (SSA) is a non-parametric technique in machine learning used to analyze and forecast time series data. SSA decomposes a time series into a sum of interpretable components such as trends, oscillatory patterns, and noise. The "Caterpillar" method of SSA originated independently in Russia under the name “Гусеница” and in other countries the method is known as SSA, or Eigen Decomposition.
+Singular Spectrum Analysis (SSA) is a non-parametric technique in machine learning used to analyze and forecast time series data. SSA decomposes a time series into a sum of interpretable components such as trends, oscillatory patterns, and noise. The Caterpillar SSA-originated independently in Russia under the name “Гусеница” and in other countries the method is known as SSA, or Eigen Decomposition. This model-free method combines the advantages of many other techniques, particularly Fourier analysis and regression analysis and stands out for clarity in operation. 
 
-By decomposing a time series into a sum of components—such as trend, seasonal, and noise—SSA enables the identification of patterns and structures that might be obscured in the raw data. This decomposition is achieved through Singular Value Decomposition (SVD) applied to a Hankel matrix constructed from the time series. SSA's ability to model complex, non-linear time series dynamics makes it valuable for applications from economic forecasting to environmental monitoring, where understanding and predicting trends and cycles is needed.
+The Caterpillar method was started in 1970s by Tatiana P. Kister, a mathematician and programmer from Leningrad State University. So, Saint Petersburg State University (then Leningrad State University) was instrumental in its development, with significant contributions from the Department of Statistical Modeling under the leadership of S.M. Ermakov. Nowadays, [Nina Golyandina](https://scholar.google.it/citations?user=1druVRYAAAAJ&hl=it) is knows for her extensive publications and research of the Caterpillar-SSA.
 
-This script for Singular Spectrum Analysis (SSA) forecasting offers several advantages over traditional time series models like ARIMA and [SARIMA](https://github.com/roverbird/time-series-forecasting-adriatic-tide/). Unlike the Seasonal Autoregressive Integrated Moving Average (SARIMA), which rely on linear assumptions and parameters to capture trends, seasonality, and noise, SSA decomposes the time series into additive components using matrix factorization techniques. We can view the contribution of each of the signals (corresponding to each singular value).
-
-Non-parametric approach allows SSA to capture complex, non-linear patterns and dynamics that linear models might miss. SSA is particularly useful when dealing with irregular or noisy data, as it can decompose the time series into a series of components that can be individually analyzed and forecasted. SSA also provides a more flexible framework for handling data with varying periodicities and structures, which can be a limitation for ARIMA and SARIMA models that assume constant seasonality and trend components.
+The basic version of SSA involves transforming a one-dimensional series into a multidimensional one using a single-parameter shift procedure (hence the name "Caterpillar"), analyzing the resulting multidimensional trajectory using principal component analysis (singular value decomposition), and reconstructing (approximating) the series based on the selected principal components. By decomposing a time series into a sum of components—such as trend, seasonal, and noise — SSA enables the identification of patterns and structures that might be obscured in the raw data. This decomposition is achieved through Singular Value Decomposition (SVD) applied to a Hankel matrix constructed from the time series.
 
 ## SSA vs SARIMA
 
-[SARIMA](https://github.com/roverbird/time-series-forecasting-adriatic-tide) and SSA are both valid methods for analyzing time series data with seasonal patterns, but they approach the problem differently, and are not directly comparable. SARIMA (Seasonal ARIMA, or Seasonal Autoregressive Integrated Moving Average) is specifically designed to handle seasonal effects by incorporating seasonal differencing and autoregressive terms into its model. In contrast, SSA offers a more advanced and flexible approach by decomposing the time series into additive components such as trends, seasonal patterns, and noise through matrix decomposition. While these methods are not directly comparable due to their distinct methodologies, they can be evaluated against each other in practical applications to determine which best captures the underlying patterns and performs more accurately for a given real-world time series. See some examples of such a comparison [here](https://www.researchgate.net/publication/348820189_Comparison_of_SSA_and_SARIMA_in_Forecasting_the_Rainfall_in_Sumatera_Barat/).
+SSA forecasting offers some advantages over traditional time series models like ARIMA and [SARIMA](https://github.com/roverbird/time-series-forecasting-adriatic-tide/). Unlike the Seasonal Autoregressive Integrated Moving Average (SARIMA), which rely on linear assumptions and parameters to capture trends, seasonality, and noise, SSA decomposes the time series into additive components using matrix factorization techniques. We can view the contribution of each of the signals (corresponding to each singular value). This is particularly useful when dealing with irregular or noisy data, as SSA can decompose the time series into a series of components that can be individually analyzed and forecasted. SSA also provides a more flexible framework for handling data with varying periodicities and structures, which can be a limitation for ARIMA and SARIMA models that assume constant seasonality and trend components.
+
+[SARIMA](https://github.com/roverbird/time-series-forecasting-adriatic-tide) and SSA are both valid methods for analyzing time series data with seasonal patterns, but they approach the problem differently, and are not directly comparable. SARIMA (Seasonal ARIMA, or Seasonal Autoregressive Integrated Moving Average) is designed to handle seasonal effects by incorporating seasonal differencing and autoregressive terms into its model. In contrast, SSA offers a more advanced and flexible approach by decomposing the time series into additive components such as trends, seasonal patterns, and noise through matrix decomposition. While these methods are not directly comparable due to their distinct methodologies, they can be evaluated against each other in practical applications to determine which best captures the underlying patterns and performs more accurately for a given real-world time series. See some examples of such a comparison [here](https://www.researchgate.net/publication/348820189_Comparison_of_SSA_and_SARIMA_in_Forecasting_the_Rainfall_in_Sumatera_Barat/).
 
 Please, check out [python implementation of SARIMA](https://github.com/roverbird/time-series-forecasting-adriatic-tide) with tidal data from Koper, Slovenia. 
+
+## Challenges of Using SSA
+
+There are challenges and uncertainties associated with using SSA for time series analysis, particularly in choosing the embedding dimension (window size), `embedding_dimension`. SSA, as a factor analysis for time series, relies on constructing a matrix from a selected window size and finding the principal components from this matrix. These components are then used to reconstruct the original series. However, the results vary significantly depending on the chosen window size, making it difficult to identify which components correspond to underlying patterns like seasonality or trends.
+
+Referencing the work of Nina Eduardovna Golyandina and her colleagues, it is important to say that it’s often challenging to determine the right window size empirically. One approach is to experiment with historical data, comparing forecast errors, or use Monte Carlo simulations to understand how different factors influence the results. One needs to inspect the reconstruction plots generated during SSA to identify components that likely represent seasonal patterns. These seasonal components are generally more recognizable, whereas trends and noise are more ambiguous. The process of choosing the optimal window size remains uncertain, as different window sizes can lead to different interpretations of the same data, so validation of the results is very important. It’s recommended to experiment with different window sizes.
 
 ## Historical Background
 
@@ -77,15 +83,15 @@ git clone https://github.com/roverbird/caterpillar-ssa-timeseries-forecasting.gi
 python ~/caterpillar-ssa-timeseries-forecasting/scripts/mySSAtest2.py
 ```
 
-### Parameters
+### Window Size
 
-You can change some values in the scripts to get better results (or any results at all - try a different dataset if you are stuck with NaNs). So, notice this line of code:
+You can change some parameters in the scripts to get better results (or any results at all - try a different dataset if you are completely stuck with NaNs). Notice this line of code:
 
 ```python
 ssa.embed(embedding_dimension=36, suspected_frequency=12, verbose=True)
 ```
 
-It calls the `embed` method of the `mySSA` class with specific values that you can tweak.
+It calls the `embed` method of the `mySSA` class with specific values that you can tweak to get better results.
 
 1. **`embedding_dimension=36`**:
    - **Purpose**: This specifies the window size for embedding the time series into a Hankel matrix. The embedding dimension is crucial because it determines the size of the matrix used for Singular Spectrum Analysis (SSA).
@@ -124,13 +130,11 @@ _Forecast plot_
 
 ### Explanation of Outputs and Results
 
-Running the script with `TideHourly.csv` dataset (30 days of Adriatic sea tidal data from Koper, Slovenia) will give output which includes plots and some results. Let's take a look at them.
-
-Let's set the values in the script as follows: 
+First set the window size as follows and run the script: 
 
 `ssa.embed(embedding_dimension=36, suspected_frequency=12, verbose=True)`
 
-Running the script with the Koper tide level dataset will give results below, and here are some explanations.
+Running the script with `TideHourly.csv` dataset (30 days of Adriatic sea tidal data from Koper, Slovenia) will give output which includes plots and some results. Let's take a look at them.
 
 #### 1. **Embedding Summary**
 
